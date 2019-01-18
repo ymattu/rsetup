@@ -25,7 +25,7 @@ setup_R() {
 
 install_RStudio() {
     print_message "Installing RStudio..."
-    wget https://download1.rstudio.org/RStudio-1.1.4.dmg
+    wget https://download1.rstudio.org/RStudio-1.1.463.dmg
     sudo hdiutil attach RStudio-1.1.463.dmg
     sudo ditto "/Volumes/RStudio-1.1.463/RStudio.app" "/Applications/RStudio.app"
     sudo hdiutil detach /Volumes/RStudio-1.1.463
