@@ -38,27 +38,15 @@ download_dotfiles() {
     else
         print_message "Downloading dotfiles..."
         if type git > /dev/null 2>&1; then
-            git clone https://github.com/ymattu/dotfiles.git
+            git clone https://github.com/ymattu/rsetup.git
         else
-            curl -sL https://github.com/ymattu/dotfiles/archive/master.tar.gz | tar xz
+            curl -sL https://github.com/ymattu/rsetup/archive/master.tar.gz | tar xz
             mv dotfiles-master dotfiles
         fi
         print_success "successfully downloaded"
     fi
 }
 
-change_login_shell() {
-    print_title "zsh"
-    loginshell="/usr/local/bin/zsh"
-    if [ $SHELL == $loginshell ]; then
-        print_warning "Login shell: already zsh"
-    else
-        print_message "Changing login shell..."
-        grep "$loginshell" /etc/shells &>/dev/null || sudo sh -c "echo $loginshell >> /etc/shells"
-        chsh -s $loginshell
-        print_success "successfully changed to zsh"
-    fi
-}
 
 reboot_system() {
     print_title "Reboot System"
@@ -69,11 +57,6 @@ reboot_system() {
     fi
 }
 
-reload_shell() {
-    printf "\n\n"
-    exec $(which xonsh)
-}
-
 main() {
     check_os
     download_dotfiles
@@ -81,9 +64,7 @@ main() {
     . $DOTFILES_PATH/setup/deploy.sh
     . $DOTFILES_PATH/setup/initialize/initialize.sh
 
-    change_login_shell
     reboot_system
-    reload_shell
 }
 
 main
