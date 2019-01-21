@@ -30,7 +30,7 @@ check_os() {
     fi
 }
 
-download_dotfiles() {
+download_r_files() {
     print_title "Download dotfiles"
     if [ -d $DOTFILES_PATH ]; then
         cd dotfiles && git pull
@@ -59,7 +59,7 @@ reboot_system() {
 
 main() {
     check_os
-    download_dotfiles
+    download_r_files
 
     . $DOTFILES_PATH/setup/deploy.sh
     . $DOTFILES_PATH/setup/initialize/initialize.sh
